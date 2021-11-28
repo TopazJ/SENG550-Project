@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  mongo:
+    image: "mongo:5.0"
+    ports:
+      - "25262:27017"
+    volumes:
+      - "data:/data/db"
+  mongo-express:
+    image: "mongo-express:0.54"
+    ports:
+      - "21290:8081"
+  jupyter:
+    image: "jupyter/pyspark-notebook:2021-11-20"
+    ports:
+      - "22085:8888"
+      - "16833:4040"
+    command: start-notebook.sh --NotebookApp.token=''
+    volumes:
+      - "./:/home/jovyan/work"
+    environment:
+      PYSPARK_SUBMIT_ARGS: "--packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1 pyspark-shell"
+volumes:
+  data:
