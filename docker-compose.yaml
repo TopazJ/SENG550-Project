@@ -16,5 +16,7 @@ services:
       - "22085:8888"
       - "16833:4040"
     command: start-notebook.sh --NotebookApp.token=''
+    volumes:
+      - "./:/home/jovyan/work"
 volumes:
   data:
