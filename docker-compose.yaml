@@ -10,5 +10,11 @@ services:
     image: "mongo-express:0.54"
     ports:
       - "21290:8081"
+  jupyter:
+    image: "jupyter/pyspark-notebook:2021-11-20"
+    ports:
+      - "22085:8888"
+      - "16833:4040"
+    command: start-notebook.sh --NotebookApp.token=''
 volumes:
   data:
