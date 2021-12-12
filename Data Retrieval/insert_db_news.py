@@ -2,8 +2,10 @@ import json
 import pymongo
 import sys
 
+DB_access_address = ""  # Paste DB access address here
+
 def insert_headers_from_json_file(year, month, start_day, end_day):
-  client = pymongo.MongoClient("") #DB access address here
+  client = pymongo.MongoClient(DB_access_address) 
   db = client.seng550
   headers = db['headers']
   month_s = month if month >= 10 else f"0{month}"
@@ -28,7 +30,7 @@ if __name__ == '__main__':
     insert_headers_from_json_file(year, month, start_day, end_day)
   elif arguments[1] == 'f':
     _, _, key, val = arguments
-    client = pymongo.MongoClient("") #DB access address here
+    client = pymongo.MongoClient(DB_access_address)
     db = client.seng550
     headers = db['headers']
     for article in headers.find({key: val}):
