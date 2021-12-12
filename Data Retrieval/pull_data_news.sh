@@ -1,12 +1,13 @@
 #!/bin/bash
 
-if [ "$#" -ne 4 ]; then
-  echo "Requires year, month, start day, end day"
+if [ "$#" -ne 5 ]; then
+  echo "Requires year, month, start day, end day, token"
 fi
 YEAR=$1
 MONTH=$2
 DAY=$3
 END_DAY=$4
+TOKEN=$5
 until [ ${DAY} -gt ${END_DAY} ]
 do
   if [ ${DAY} -lt 10 ]; then
@@ -28,7 +29,7 @@ do
   END_DATE_TIME="${DATE}T23:59:59Z"
   echo $START_DATE_TIME
   echo $END_DATE_TIME
-  URL="https://gnews.io/api/v4/top-headlines?token=1fa9c832e17e14aa31e82918044dada5&lang=en&from=${START_DATE_TIME}&to=${END_DATE_TIME}"
+  URL="https://gnews.io/api/v4/top-headlines?token=${TOKEN}&lang=en&from=${START_DATE_TIME}&to=${END_DATE_TIME}"
   echo $URL
 
   CMD=$(curl ${URL})
